@@ -266,7 +266,7 @@ const converti = (N, b) => {
 --
 Converte un naturale stem:[N] nella rappresentazione in base stem:[b]
 
-Vedere https://observablehq.com/@gionatamassi-sb/numeri-senza-segno
+Vedere https://observablehq.com/@gionatamassi-sb/numeri-senza-segno/2
 --
 
 === Conversione -- JS
@@ -678,18 +678,69 @@ Il valore calcolato di stem:[h] è 298.0232238769531.
 
 == Ottimizzazione
 
-* Teorema di Weirstrass
+* Teorema di Weierstrass
 * Condizioni analitiche del primo ordine
 * Metodo di Newton per il calcolo degli estremanti
 * Interpretazione geometrica del metodo di Newton applicato alla derivata prima
 
-////
+[.notes]
+--
+.Definizione di massimo e minimo
+====
+stem:[x_{0}] è un **minimo locale** (**massimo locale**) della funzione obiettivo stem:[f(x)] se esiste un intorno stem:[I(x_{0})], intorno di stem:[x_{0}], tale che stem:[f(x_{0})\leq f(x)] (stem:[f(x_{0})\geq f(x)]) per ogni stem:[x\in[a,b\] ].
 
-1. Mettere un'immagine per far enunciare i teorema di Weierstrass
+Se stem:[I(x_{0})] coincide con l'insieme stem:[[a,b\] ] allora stem:[x_{0}] è un **minimo assoluto** (**massimo assoluto**).
+====
 
-2. Immagine in cui è presente funzione e derivata prima per condizioni analitiche primo ordine
+**Teorema di Weierstrass**
+
+Sia stem:[[a, b\] \subset \mathbb{R}] un intervallo chiuso e limitato non vuoto e sia stem:[f \colon [a, b\] \to \mathbb{R}] una funzione continua. Allora stem:[f(x)] ammette almeno un punto di massimo assoluto e un punto di minimo assoluto nell'intervallo stem:[[a, b\] ].
 
 
-3. Animazione SQP con parabole
+**Condizioni analitiche del primo ordine**
 
-////
+Se il punto stem:[x_{0}] è un ottimo locale di stem:[f(x)] e se stem:[f(x)] è derivabile in stem:[x_{0}], allora stem:[f'(x_{0})=0].
+
+
+[IMPORTANT]
+Le condizioni analitiche del 1^o^ ordine sono solo necessarie.
+
+Se stem:[f(x)] è continua in stem:[[a, b\] ], gli ottimi locali (e globali) possono trovarsi nei punti:
+
+* stem:[x_{s}] in cui stem:[f'(x_{s})=0] (punti stazionari)
+* gli estemi stem:[a] e stem:[b]
+* i punti stem:[x_g] in cui stem:[f(x_g)] non è derivabile (punti singolari)
+
+--
+
+=== Estremanti e derivate
+
+image::punti_estremi_e_stazionari.gif[Punti estremi e condizioni del primo ordine]
+
+[.notes]
+--
+Nella figura è presente il grafico di una funzione e della sua derivata prima. Sia la funzione che la derivata sono continue e rappresentate in un intervallo compatto nel quale, per il teorema di Weierstrass, esistono almeno un massimo ed un minimo.
+Se si considera l'intervallo di rappresentazione, sia il massimo che il minimo assoluti sono negli estremi, mentre quelli relativi coincidono con i punti in cui la derivata prima si annulla. Tali punti sono i punti stazionari e sono candidati ad essere estremanti.
+--
+
+=== Metodi
+
+image::sqp.png[Metodo di Newton per l'ottimizzazione]
+
+[.notes]
+--
+Nella figura sono rappresentate una funzione stem:[g(\omega)] ed una sequenza di parabole approssimanti tale funzioni in tre punti indicati dagli indici 0, 1 e 2. La parabola stem:[p(\omega_k)] è
+
+* passante per stem:[\left(\omega_k, g(\omega_k)\right)]
+* tangente in stem:[\left(\omega_k, g(\omega_k)\right)], ossia ha lo stesso valore della derivata in stem:[\omega_k]
+* curvata allo stesso modo, ossia ha lo stesso valore della derivata seconda in stem:[\omega_k]
+
+Il processo di approssimazione del massimo o del minimo avviene, in analogia con il metodo di Newton, sostituendo alla stima corrente dell'estremante stem:[\omega_k] la proiezione sull'asse delle ascisse del vertice della parabola.
+
+Sviluppando i conti:
+
+stem:[\omega_{k+1} = \omega_k - \frac{g'(\omega_k)}{g''(\omega_k)}]
+
+Si evidenzia il fatto che la formula è identica a quella del metodo di Newton per la ricerca delle radici di funzione ma opera sulla derivata prima.
+
+--
